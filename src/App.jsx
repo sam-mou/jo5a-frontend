@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import './index.css'
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -8,6 +9,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
 import Pitches from "./pages/Pitches";
+import OrganizeGame from "./pages/OrganizeGame";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/organize-game/" element={<OrganizeGame />} />
         <Route path="/pitches/" element={<Pitches />} />
         <Route path="/pitches/:id" element={<PitchDetails />} />
         <Route path="/my-bookings" element={<MyBookings />} />
