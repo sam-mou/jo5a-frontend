@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
 import Pitches from "./pages/Pitches";
 import OrganizeGame from "./pages/OrganizeGame";
+import LoginSuccessful from "./pages/LoginSuccessful";
+import SignupSuccessful from "./pages/SignupSuccessful";
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
         <Route path="/pitches/:id" element={<PitchDetails />} />
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="*" element={<NotFoundPage />}></Route>
+        <Route path="/login-successful" element={<LoginSuccessful />}></Route>
+        <Route path="/signup-successful" element={<SignupSuccessful />}></Route>
+
       </Routes>
       <Footer />
     </Router>

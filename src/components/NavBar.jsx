@@ -3,7 +3,7 @@ import LogoJoga from "../assets/images/LogoJoga.png";
 
 function NavBar() {
     return (
-        <nav className="grid grid-cols-2 items-center p-4 backdrop-blur-sm fixed top-0 w-full z-50 shadow-md text-white">
+        <nav className="grid grid-cols-2 items-center p-4 backdrop-blur-sm fixed top-0 w-full z-50 shadow-md text-gray-300">
             <div className="flex items-center">
                 <Link to="/" className="flex items-center">
                     <img
@@ -15,7 +15,7 @@ function NavBar() {
             </div>
 
             <div className="flex items-center justify-end space-x-4">
-                <Link to="/pitches" className="font-medium hover:text-gray-300 hover:underline">
+                <Link to="/pitches" className="font-medium drop-shadow-sm hover:text-gray-300 hover:underline">
                     Book a Game
                 </Link>
                 <Link to="/organize-game" className="font-medium hover:text-gray-300 hover:underline">
@@ -29,6 +29,7 @@ function NavBar() {
                 </Link>
             </div>
         </nav>
+
     );
 }
 

@@ -1,6 +1,7 @@
-import HeroHeader from "../components/HeroHeader"
-import HowItWorks from "../components/HowItWorks"
-import WhereToPlay from "../components/WhereToPlay"
+import AddedValue from "../sections/AddedValue"
+import HeroHeader from "../sections/HeroHeader"
+import HowItWorks from "../sections/HowItWorks"
+import WhereToPlay from "../sections/WhereToPlay"
 
 function HomePage() {
   return (
@@ -8,6 +9,7 @@ function HomePage() {
       <HeroHeader></HeroHeader>
       <HowItWorks></HowItWorks>
       <WhereToPlay></WhereToPlay>
+      <AddedValue></AddedValue>
     </>
   )
 }

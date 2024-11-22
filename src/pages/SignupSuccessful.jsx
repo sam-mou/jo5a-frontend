@@ -4,25 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../api/apiURL";
 import JogaLogoGreen from "../assets/images/JogaLogoGreen.png";
 
-function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+function SignupSuccessful() {
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post(`${API_URL}/auth/login`, { email, password })
-      .then((response) => {
-        const { authToken } = response.data;
-        localStorage.setItem("authToken", authToken);
-        navigate("/login-successful");
-      })
-      .catch((error) => {
-        console.log("Login failed", error);
-        alert("Login failed. Please check your credentials and try again.", error);
-      });
-  };
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      axios
+        .post(`${API_URL}/auth/login`, { email, password })
+        .then((response) => {
+          const { authToken } = response.data;
+          localStorage.setItem("authToken", authToken);
+          navigate("/login-successful");
+        })
+        .catch((error) => {
+          console.log("Login failed", error);
+          alert("Login failed. Please check your credentials and try again.", error);
+        });
+    };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-customBlue">
@@ -34,6 +35,13 @@ function LoginPage() {
             className="w-auto h-24"
           />
         </div>
+
+        <h2 className="text-2xl font-bold text-customGreen text-center mb-4">
+          🎉 Your account is created 🎉
+        </h2>
+        <p className="text-gray-700 text-center mb-6">
+          Now login to book a game!
+        </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -83,4 +91,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SignupSuccessful;

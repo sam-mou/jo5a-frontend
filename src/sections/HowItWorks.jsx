@@ -1,10 +1,12 @@
 import SearchGame from "../assets/images/SearchGame.png";
 import BookGame from "../assets/images/BookGame.png";
 import PlayGame from "../assets/images/PlayGame.png";
+import PageContainer from "../components/PageContainer";
 
 function HowItWorks() {
   return (
     <div className="bg-customBlue py-16">
+      <PageContainer>
       <div className="container mx-auto px-4">
         <h2 className="text-white text-3xl font-bold font-climate text-center mb-8">
           HOW JOGA WORKS
@@ -47,6 +49,7 @@ function HowItWorks() {
           </div>
         </div>
       </div>
+      </PageContainer>
     </div>
   );
 }
