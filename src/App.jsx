@@ -9,7 +9,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
 import Pitches from "./pages/Pitches";
-import OrganizeGame from "./pages/OrganizeGame";
+import CreatePitch from "./pages/CreatePitch";
 import LoginSuccessful from "./pages/LoginSuccessful";
 import SignupSuccessful from "./pages/SignupSuccessful";
 
@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/organize-game/" element={<OrganizeGame />} />
+        <Route path="/organize-game/" element={<CreatePitch />} />
         <Route path="/pitches/" element={<Pitches />} />
         <Route path="/pitches/:id" element={<PitchDetails />} />
         <Route path="/my-bookings" element={<MyBookings />} />
