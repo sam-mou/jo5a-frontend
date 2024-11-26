@@ -50,7 +50,6 @@ function BookingForm({ pitchId }) {
       <h2 className="text-xl font-bold text-white my-4">Book This Pitch</h2>
       {message && <p className="text-white mb-4">{message}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Number of Players */}
         <div>
           <label className="block text-white font-semibold mb-2" htmlFor="numberOfPlayers">
             Number of Players
@@ -67,7 +66,6 @@ function BookingForm({ pitchId }) {
           />
         </div>
 
-        {/* Date */}
         <div>
           <label className="block text-white font-semibold mb-2" htmlFor="date">
             Date
@@ -82,7 +80,6 @@ function BookingForm({ pitchId }) {
           />
         </div>
 
-        {/* Start Time */}
         <div>
           <label className="block text-white font-semibold mb-2" htmlFor="startTime">
             Start Time
@@ -97,7 +94,6 @@ function BookingForm({ pitchId }) {
           />
         </div>
 
-        {/* End Time */}
         <div>
           <label className="block text-white font-semibold mb-2" htmlFor="endTime">
             End Time
@@ -112,7 +108,6 @@ function BookingForm({ pitchId }) {
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-customGreen text-white py-2 px-4 rounded-lg hover:bg-green-600 transition"

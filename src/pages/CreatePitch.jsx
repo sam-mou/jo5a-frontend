@@ -5,6 +5,7 @@ import { API_URL } from "../api/apiURL";
 import LogoJoga from "../assets/images/LogoJoga.png";
 import HeroBannerSamy from "../assets/images/HeroBannerSamy.png";
 
+
 function CreatePitch() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -49,7 +50,6 @@ function CreatePitch() {
 
   return (
     <div className="bg-customBlue min-h-screen">
-      {/* Hero Banner */}
       <div
         className="relative h-[450px] bg-cover bg-end"
         style={{ backgroundImage: `url(${HeroBannerSamy})` }}
@@ -61,7 +61,6 @@ function CreatePitch() {
         </div>
       </div>
 
-      {/* Form Section */}
       <div className="flex justify-center items-center py-8 bg-customBlue">
       <div className="w-full max-w-lg bg-[#65617B] backdrop-blur-md p-6 rounded-lg shadow-lg">
   <div className="flex justify-center mb-6">
