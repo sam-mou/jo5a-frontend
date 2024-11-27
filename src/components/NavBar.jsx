@@ -39,7 +39,6 @@ function NavBar() {
               <span>{user.username || "User"}</span>
             </button>
 
-            {/* Dropdown Menu */}
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white text-black rounded-lg shadow-lg py-2">
                 <Link

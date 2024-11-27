@@ -22,7 +22,7 @@ function Pitches() {
       });
   }, []);
 
-  if (pitches === undefined || setPitches === undefined) { 
+  if (pitches === undefined || setPitches === undefined) {
     return "Loading...";
   }
 
@@ -34,7 +34,7 @@ function Pitches() {
       >
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
           <h1 className="text-5xl font-climate font-bold text-white text-center">
-            BOOK A PITCH 
+            BOOK A GAME
           </h1>
         </div>
       </div>
@@ -69,7 +69,7 @@ function Pitches() {
                   alt="Capacity Icon"
                   className="h-6 w-6 mr-2"
                 />
-                <span>{pitch.capacity} players</span>
+                <span>{new Date(pitch.date).toLocaleDateString("en-GB")}</span>
               </div>
 
               <div className="flex items-center text-white">
@@ -78,7 +78,7 @@ function Pitches() {
                   alt="Type Icon"
                   className="h-6 w-6 mr-2"
                 />
-                <span>{pitch.type}</span>
+                <span>{pitch.startTime}</span>
               </div>
 
               <div>

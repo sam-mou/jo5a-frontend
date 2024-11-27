@@ -17,6 +17,7 @@ function LoginPage() {
         const { authToken } = response.data;
         localStorage.setItem("authToken", authToken);
         navigate("/login-successful");
+        window.location.reload();
       })
       .catch((error) => {
         console.log("Login failed", error);

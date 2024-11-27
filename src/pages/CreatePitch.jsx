@@ -5,10 +5,11 @@ import { API_URL } from "../api/apiURL";
 import LogoJoga from "../assets/images/LogoJoga.png";
 import HeroBannerSamy from "../assets/images/HeroBannerSamy.png";
 
-
 function CreatePitch() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [date, setDate] = useState(""); // Added date
   const [description, setDescription] = useState("");
   const [capacity, setCapacity] = useState("");
   const [type, setType] = useState("");
@@ -22,6 +23,8 @@ function CreatePitch() {
     const newPitch = {
       name,
       location,
+      startTime,
+      date, 
       description,
       capacity,
       type,
@@ -29,13 +32,16 @@ function CreatePitch() {
     };
 
     axios
-      .post(`${API_URL}/pitches`, newPitch, { headers: { Authorization: `Bearer ${storedToken}` } })
+      .post(`${API_URL}/pitches`, newPitch, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
-        console.log(response.data);
-        console.log("New pitch successfully created!");
+        console.log("New pitch successfully created!", response.data);
 
         setName("");
         setLocation("");
+        setStartTime("");
+        setDate(""); 
         setDescription("");
         setCapacity("");
         setType("");
@@ -43,7 +49,7 @@ function CreatePitch() {
         navigate("/pitches");
       })
       .catch((error) => {
-        console.log("Error creating new pitch", error);
+        console.error("Error creating new pitch", error);
         alert("Error creating new pitch. Please try again.");
       });
   };
@@ -62,10 +68,10 @@ function CreatePitch() {
       </div>
 
       <div className="flex justify-center items-center py-8 bg-customBlue">
-      <div className="w-full max-w-lg bg-[#65617B] backdrop-blur-md p-6 rounded-lg shadow-lg">
-  <div className="flex justify-center mb-6">
-    <img src={LogoJoga} alt="Joga Logo" className="w-auto h-32" />
-  </div>
+        <div className="w-full max-w-lg bg-[#65617B] backdrop-blur-md p-6 rounded-lg shadow-lg">
+          <div className="flex justify-center mb-6">
+            <img src={LogoJoga} alt="Joga Logo" className="w-auto h-32" />
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -81,6 +87,7 @@ function CreatePitch() {
                 required
               />
             </div>
+
             <div>
               <label htmlFor="location" className="block text-white font-semibold mb-2">
                 Location
@@ -90,6 +97,35 @@ function CreatePitch() {
                 id="location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="startTime" className="block text-white font-semibold mb-2">
+                Start Time (1 hour booking)
+              </label>
+              <input
+                type="time"
+                id="startTime"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+                required
+              />
+            </div>
+
+
+            <div>
+              <label htmlFor="date" className="block text-white font-semibold mb-2">
+                Date
+              </label>
+              <input
+                type="date"
+                id="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
                 required
               />
@@ -111,7 +147,7 @@ function CreatePitch() {
 
             <div>
               <label htmlFor="capacity" className="block text-white font-semibold mb-2">
-                Capacity
+                Number of Players 
               </label>
               <input
                 type="number"
@@ -160,7 +196,7 @@ function CreatePitch() {
               type="submit"
               className="w-full bg-customGreen text-white py-2 px-4 rounded-lg hover:bg-green-600 transition"
             >
-              Create Pitch
+              Submit your Game
             </button>
           </form>
         </div>
