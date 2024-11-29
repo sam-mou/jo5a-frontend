@@ -3,41 +3,48 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../api/apiURL";
+import LocationIcon from "../assets/images/LocationIcon.png";
 
 function MyProfile() {
-  const navigate = useNavigate();
-  const [user, setUser] = useState({
-    username: "",
-    email: "",
-    accountCreated: "",
-  });
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState(null);
   const storedToken = localStorage.getItem("authToken");
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/profile`, {
+      .get(`${API_URL}/bookings/user`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        setUser(response.data.user);
-        setBookings(response.data.bookings || []);
+        setBookings(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching profile data:", error);
+        console.error("Error fetching bookings:", error);
       });
-  }, [navigate, storedToken]);
+  }, [storedToken]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/");
-    window.location.reload();
+  const handleDeleteBooking = (bookingId) => {
+    axios
+      .delete(`${API_URL}/bookings/${bookingId}`, { 
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then(() => {
+        alert("Booking deleted successfully!");
+        setBookings((prevBookings) =>
+          prevBookings.filter((booking) => booking._id !== bookingId)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting booking:", error);
+        alert("Failed to delete booking. Please try again.");
+      });
   };
+  
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB"); 
-  };
+
+  if (bookings === null) {
+    return "Loading...";
+  }
 
   return (
     <div className="bg-customBlue min-h-screen">
@@ -46,55 +53,44 @@ function MyProfile() {
         style={{ backgroundImage: `url(${MyProfileBanner})` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <h1 className="text-5xl font-bold text-white text-center">
-            Welcome, {user.username}
+          <h1 className="text-5xl font-climate font-bold text-white text-center">
+            Manage Your Bookings
           </h1>
         </div>
       </div>
 
-      <div className="p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Profile Image and Username */}
-        <div className="bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-lg shadow-lg text-center">
-          <div className="w-24 h-24 mx-auto bg-gray-300 rounded-full"></div>
-          <h2 className="text-xl font-bold text-white mt-4">{user.username}</h2>
-        </div>
-
-        <div className="bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-lg shadow-lg text-center">
-          <h3 className="text-lg font-bold text-white">Email</h3>
-          <p className="text-white">{user.email}</p>
-        </div>
-
-        <div className="bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-lg shadow-lg text-center">
-          <h3 className="text-lg font-bold text-white">Account Created</h3>
-          <p className="text-white">{formatDate(user.accountCreated)}</p>
-        </div>
-      </div>
-
-      <div className="p-8">
-        <h2 className="text-2xl font-bold text-white text-center mb-4">
-          Your Bookings
-        </h2>
+      <div className="container mx-auto px-4 py-8">
         {bookings.length === 0 ? (
           <p className="text-white text-center">No bookings yet.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {bookings.map((booking) => (
               <div
                 key={booking._id}
-                className="bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-lg shadow-lg"
+                className="bg-white bg-opacity-15 backdrop-blur-md rounded-lg shadow-md p-6 flex flex-col space-y-4"
               >
-                <h3 className="text-lg font-bold text-white">
-                  {booking.pitchName}
-                </h3>
-                <p className="text-white">
-                  Date: {formatDate(booking.date)}
-                </p>
-                <p className="text-white">
-                  Time: {booking.startTime}
-                </p>
-                <p className="text-white">
-                  Players: {booking.numberOfPlayers}
-                </p>
+                <h2 className="text-xl font-bold text-white">
+                  {booking.pitchId.name}
+                </h2>
+
+                <div className="flex items-center text-white">
+                  <img
+                    src={LocationIcon}
+                    alt="Location Icon"
+                    className="h-6 w-6 mr-2"
+                  />
+                  <span>{booking.pitchId.location}</span>
+                </div>
+
+                <div className="flex justify-start">
+                  <button
+                    onClick={() => handleDeleteBooking(booking._id)}
+                    className="bg-red-600 text-white py-2 px-4 rounded-lg flex items-center hover:bg-red-500 transition"
+                  >
+                
+                    Delete Booking
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -103,7 +99,10 @@ function MyProfile() {
 
       <div className="p-8 flex justify-center">
         <button
-          onClick={handleLogout}
+          onClick={() => {
+            localStorage.removeItem("authToken");
+            navigate("/login", { replace: true });
+          }}
           className="bg-red-600 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-red-500"
         >
           Log Out

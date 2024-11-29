@@ -13,11 +13,13 @@ import CreatePitch from "./pages/CreatePitch";
 import LoginSuccessful from "./pages/LoginSuccessful";
 import SignupSuccessful from "./pages/SignupSuccessful";
 import EditPitchPage from "./pages/EditPitchPage";
-
+import { AuthProviderWrapper } from "./AuthContext";
 function App() {
   return (
     <Router>
+       <AuthProviderWrapper>
       <NavBar />
+      </AuthProviderWrapper>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />

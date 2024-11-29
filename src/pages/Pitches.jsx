@@ -8,13 +8,12 @@ import LocationIcon from "../assets/images/LocationIcon.png";
 import TypeIcon from "../assets/images/TypeIcon.png";
 
 function Pitches() {
-  const [pitches, setPitches] = useState([]);
+  const [pitches, setPitches] = useState(null);
 
   useEffect(() => {
     axios
       .get(`${API_URL}/pitches`)
       .then((response) => {
-        console.log("API response", response.data);
         setPitches(response.data);
       })
       .catch((error) => {
@@ -22,7 +21,7 @@ function Pitches() {
       });
   }, []);
 
-  if (pitches === undefined || setPitches === undefined) {
+  if (pitches === null) {
     return "Loading...";
   }
 
@@ -41,7 +40,7 @@ function Pitches() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {pitches.map((pitch) => (
+          {pitches.length > 0 && pitches.map((pitch) => (
             <div
               key={pitch._id}
               className="bg-white bg-opacity-15 backdrop-blur-md rounded-lg shadow-md p-6 flex flex-col space-y-4"

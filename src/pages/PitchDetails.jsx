@@ -18,11 +18,11 @@ function PitchDetails() {
   const [pitch, setPitch] = useState(null);
   const storedToken = localStorage.getItem("authToken");
 
+
+
   useEffect(() => {
     axios
-      .get(`${API_URL}/pitches/${id}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
+      .get(`${API_URL}/pitches/${id}`, {headers: { Authorization: `Bearer ${storedToken}` },})
       .then((response) => {
         setPitch(response.data);
       })
@@ -32,11 +32,14 @@ function PitchDetails() {
       });
   }, [id, navigate, storedToken]);
 
+
+
   const handleDeleteSuccess = () => {
     navigate("/pitches");
   };
 
   if (!pitch) return <p className="text-white text-center">Loading...</p>;
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -56,7 +59,8 @@ function PitchDetails() {
         </div>
       </div>
 
-      <PageContainer>
+      
+    <PageContainer>
         <div className="mt-4 flex justify-between items-center">
           <button
             className="flex items-center text-customGreen hover:text-green-600"
@@ -96,7 +100,7 @@ function PitchDetails() {
             <span className="text-white text-center">{pitch.type}</span>
           </div>
         </div>
-      </PageContainer>
+</PageContainer>
     </div>
   );
 }

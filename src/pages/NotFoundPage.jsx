@@ -2,7 +2,7 @@ import NotFound from "../assets/images/NotFound.png";
 
 function NotFoundPage() {
   return (
-    <div className="bg-customBlue pb-10">
+    <div className="bg-customBlue h-[950px] pb-10">
       <div
         className="relative h-[450px] bg-cover bg-center"
         style={{ backgroundImage: `url(${NotFound})` }}

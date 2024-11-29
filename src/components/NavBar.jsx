@@ -1,13 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
 import LogoJoga from "../assets/images/LogoJoga.png";
 import CapacityIcon from "../assets/images/CapacityIcon.png";
 
-
 function NavBar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <nav className="grid grid-cols-2 items-center p-4 backdrop-blur-sm fixed top-0 w-full z-50 shadow-md text-gray-300">
@@ -24,38 +22,21 @@ function NavBar() {
         <Link to="/organize-game" className="font-medium hover:text-gray-300 hover:underline">
           Organize a Game
         </Link>
+        <Link to="/my-profile" className="hover:text-gray-300 hover:underline">
+              <button className="flex items-center space-x-2 hover:text-gray-300">
+                <span>My Profile</span>
+                <img src={CapacityIcon} alt="User Icon" className="h-8 w-8" />
+              </button>
+            </Link>
 
         {isLoggedIn ? (
           <div className="relative">
-            <button
-              className="flex items-center space-x-2 hover:text-gray-300"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            >
-              <img
-                src={ CapacityIcon } 
-                alt="User Avatar"
-                className="h-8 w-8 rounded-full"
-              />
-              <span>{user.username || "User"}</span>
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white text-black rounded-lg shadow-lg py-2">
-                <Link
-                  to="/my-profile"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  My Profile
-                </Link>
-                <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                  onClick={logOutUser}
-                >
-                  Logout
-                </button>
-              </div>
-            )}
+            <Link to="/my-profile" className="hover:text-gray-300 hover:underline">
+              <button className="flex items-center space-x-2 hover:text-gray-300">
+                <span>My Profile</span>
+                <img src={CapacityIcon} alt="User Icon" className="h-8 w-8" />
+              </button>
+            </Link>
           </div>
         ) : (
           <>

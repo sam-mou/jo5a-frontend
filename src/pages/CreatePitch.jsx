@@ -196,7 +196,7 @@ function CreatePitch() {
               type="submit"
               className="w-full bg-customGreen text-white py-2 px-4 rounded-lg hover:bg-green-600 transition"
             >
-              Submit your Game
+              Submit
             </button>
           </form>
         </div>

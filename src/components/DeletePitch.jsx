@@ -14,7 +14,7 @@ function DeletePitch({ pitchId, onDeleteSuccess }) {
         })
         .then(() => {
           console.log("Pitch deleted successfully");
-          onDeleteSuccess(); // Notify parent of successful deletion
+          onDeleteSuccess(); 
         })
         .catch((error) => {
           console.error("Error deleting pitch:", error);
